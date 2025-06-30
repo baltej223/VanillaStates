@@ -1,7 +1,21 @@
-# VanillaStates
+#  VanillaStates
 
 A small state management implementation inspired by React's `useState` and `useEffect`.
-Built from scratch — without React, without VDOM, just raw logic using global objects and function references, which makes it perfect to use in Vanilla JavaScript.
+Built from scratch — without React, without VDOM, just raw logic using global objects and function references — which makes it perfect to use in **Vanilla JavaScript**.
+
+---
+
+## Installation
+
+```bash
+npm i vanillastates
+```
+
+Then:
+
+```js
+import { useState, useEffect } from "vanillastates";
+```
 
 ## `useState(initialValue)`
 
@@ -18,12 +32,13 @@ console.log(count()); // → 1
 
 ### Returns:
 
-- `getter()` → Get the current state value. If passed a truthy param (like `"get-id"`), returns internal ID.
-- `setState(fn)` → Pass a function that receives the current state and returns the next.
+* `getter()` → Returns the current state value.
+  If passed a truthy param (e.g. `"get-id"`), returns internal ID (used for tracking).
+* `setState(fn)` → Function-based setter. Pass a function that receives the current value and returns the next one.
 
 ---
 
-## `useEffect(fn, dependencies)`
+##  `useEffect(fn, dependencies)`
 
 ### Usage:
 
@@ -35,17 +50,17 @@ useEffect(() => {
 
 ### Behavior:
 
-- Accepts a function and an array of _getter functions_ from `useState`.
-- Automatically links the internal IDs of states to the effect.
-- Runs the effect immediately after setup.
-- Re-runs only when the respective state changes.
+* Accepts a function and an array of *getter functions* from `useState`.
+* Internally maps each dependency’s ID to the given function.
+* Runs the effect immediately after setup.
+* Re-runs only when the respective state changes.
 
 ---
 
-## Internal Flow
+## 🔧 Internal Flow
 
-- `global.ids`: `{ [id]: stateValue }`
-- `global.changeHooks`: `{ [id]: callbackFn }`
+* `global.ids`: `{ [id]: stateValue }`
+* `global.changeHooks`: `{ [id]: callbackFn }`
 
 1. `useState` assigns a unique sequential ID to every state.
 2. `useEffect` maps that ID to a callback, and calls it once immediately.
@@ -53,13 +68,14 @@ useEffect(() => {
 
 ---
 
-## 🔧 `handleChanges(id)`
+## 🔨 `handleChanges(id)`
 
-Internal function. You don’t need to call this unless manually triggering state-linked effects.
+Internal function.
+You don’t need to call this manually unless you're triggering effect execution outside the usual flow.
 
 ---
 
-## 📦 Example
+## Example
 
 ```js
 const [count, setCount] = useState(0);
@@ -73,14 +89,14 @@ useEffect(() => {
   console.log("Hello", name());
 }, [name]);
 
-setCount((c) => c + 1); // Logs: "Count is: 1"
-setName((n) => "Baltej"); // Logs: "Hello Baltej"
+setCount((c) => c + 1);      // Logs: "Count is: 1"
+setName((n) => "Baltej");    // Logs: "Hello Baltej"
 ```
 
 ---
 
-## ❗ Notes
+## Notes
 
-- This is not a replacement for React. It’s just a lightweight concept showing how hooks can be mimicked.
-- `getter("get-id")` or any param will return the ID, used internally for dependency tracking.
-- If you mess up the parameters (e.g., pass non-functions), it throws clear errors.
+* This is **not a replacement** for React. It’s a lightweight concept showing how hooks can be mimicked.
+* `getter("get-id")` returns the internal ID used by `useEffect` to track dependencies.
+* Clear error messages are thrown if you pass invalid parameters to `useState` or `useEffect`.

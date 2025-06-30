@@ -1,0 +1,19 @@
+{
+  "name": "vanillastates",
+  "version": "1.0.0",
+  "description": "Implementation of React States in Vanilla JS",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baltej223/VanillaStates.git"
+  },
+  "author": "Baltej Singh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baltej223/VanillaStates/issues"
+  },
+  "homepage": "https://github.com/baltej223/VanillaStates#readme"
+}

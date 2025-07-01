@@ -1,6 +1,6 @@
 {
   "name": "vanillastates",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Implementation of React States in Vanilla JS",
   "main": "main.js",
   "scripts": {

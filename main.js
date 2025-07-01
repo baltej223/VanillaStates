@@ -1,3 +1,7 @@
+// Written By Baltej Singh
+// Github: @baltej223 [github.com/baltej223]
+// Livestream when I wrote this code: https://www.youtube.com/watch?v=YNGcPzgZGPM
+
 // Main Idea:
 // Two global objects will be set up. Ids and changeHooks.
 // When a new state will be defined, a new sequential ID will be genrated and a fresh entry will be made into id object with key being the sequential id and the value being the value of the state
@@ -8,6 +12,11 @@ global.ids = {};
 global.changeHooks = {};
 let idCounter = 0; // Sequential ID instead of random
 
+/**
+ * 
+ * @param {Function} fn - The callback function which runs on change in dependency.
+ * @param {Array} dependencies - The array of dependencies.
+ */
 export function useEffect(fn, dependencies) {
   if (typeof fn !== "function" || !Array.isArray(dependencies)) {
     throw new Error(
@@ -40,7 +49,11 @@ export function handleChanges(id) {
     fnToRun(global.ids[id]);
   }
 }
-
+/**
+ * 
+ * @param {any} initialValue 
+ * @returns An array, which has a getter function at 0, updater function at 1 and id [for tracking and not for user use] {like:[getter, updaterFunction, id]}
+ */
 export function useState(initialValue) {
   let id = idCounter++;
   global.ids[id] = initialValue;

@@ -1,6 +1,5 @@
 // Written By Baltej Singh
 // Github: @baltej223 [github.com/baltej223]
-// Livestream when I wrote this code: https://www.youtube.com/watch?v=YNGcPzgZGPM
 
 // Main Idea:
 // Two global objects will be set up. Ids and changeHooks.
